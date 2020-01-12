@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
 
 export default function SignIn() {
   function handleSubmit(data) {
-    console.log(data);
+    console.tron.log(data);
   }
 
   return (
