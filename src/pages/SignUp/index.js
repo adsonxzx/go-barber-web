@@ -1,13 +1,16 @@
 import React from 'react';
 import { MdEmail, MdHttps, MdPerson } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import { signUpRequest } from '../../store/modules/user/actions';
 import logo from '../../assets/images/logo.svg';
 import { Content } from '../../_layouts/auth/style';
 
 export default function SignIn() {
-  function handleSubmit(data) {
-    console.log(data);
+  const dispatch = useDispatch();
+  function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password));
   }
 
   return (
@@ -16,13 +19,13 @@ export default function SignIn() {
 
       <Form onSubmit={handleSubmit}>
         <div className="form-control">
-          <label htmlFor="nome">
+          <label htmlFor="name">
             <MdPerson color="#fff" />
           </label>
           <Input
-            name="nome"
+            name="name"
             type="text"
-            id="nome"
+            id="name"
             placeholder="nome completo"
           />
         </div>
