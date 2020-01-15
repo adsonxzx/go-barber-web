@@ -20,6 +20,10 @@ export default function user(state = INITIAL_STATE, action) {
       return produce(state, draft => {
         draft.loading = false;
       });
+    case '@auth/SIGN_OUT':
+      return produce(state, draft => {
+        draft.profile = null;
+      });
     default:
       return state;
   }
