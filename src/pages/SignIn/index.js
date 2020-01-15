@@ -1,21 +1,13 @@
 import React from 'react';
 import { MdEmail, MdHttps } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import { Input } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
+
 import logo from '../../assets/images/logo.svg';
 import { Content } from '../../_layouts/auth/style';
 import { signInRequest } from '../../store/modules/auth/actions';
-
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('E-mail inválido')
-    .required('E-mail não pode ser vazio'),
-  password: Yup.string()
-    .min(6, 'Senha muito curta')
-    .required('Senha não pode ser vazia'),
-});
+import { Form, Button } from '../../styles/global';
 
 export default function SignIn() {
   const loading = useSelector(state => state.auth.loading);
@@ -49,10 +41,10 @@ export default function SignIn() {
           />
         </div>
 
-        <button type="submit">{loading ? 'Carregando' : 'Acessar'}</button>
-      </Form>
+        <Button type="submit">{loading ? 'Carregando' : 'Acessar'}</Button>
 
-      <Link to="/register">Criar Conta Gratuíta</Link>
+        <Link to="/register">Criar Conta Gratuíta</Link>
+      </Form>
     </Content>
   );
 }

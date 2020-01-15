@@ -1,32 +1,23 @@
-import { all, call, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
-import history from '../../../services/history';
 
-export function* signUpRequest({ payload }) {
+import { updateProfileSuccess } from './actions';
+
+export function* updateProfile({ payload }) {
   try {
-    const { name, email, password } = payload;
-    yield call(api.post, 'users', { name, email, password });
+    const { name, email, ...rest } = payload;
 
-    history.push('/');
-    toast.success('Cadastro realizado com sucesso!');
+    const profile = { name, email, ...(rest.oldPassword ? rest : {}) };
+
+    const { data } = yield call(api.put, 'users', profile);
+
+    yield put(updateProfileSuccess(data));
+
+    toast.success('Perfil atualizado com sucesso');
   } catch (error) {
-    toast.error('Error ao cadastrar usuário');
+    toast.error(`error ${error}`);
   }
 }
 
-export function setToken({ payload }) {
-  if (!payload) return;
-
-  const { token } = payload.auth;
-
-  if (token) {
-    console.log('entrou');
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-  }
-}
-
-export default all([
-  takeLatest('@user/SIGN_UP_REQUEST', signUpRequest),
-  takeLatest('persist/REHYDRATE', setToken),
-]);
+export default all([takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile)]);

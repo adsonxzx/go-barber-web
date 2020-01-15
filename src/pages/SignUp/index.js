@@ -2,8 +2,10 @@ import React from 'react';
 import { MdEmail, MdHttps, MdPerson } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
-import { signUpRequest } from '../../store/modules/user/actions';
+import { Input } from '@rocketseat/unform';
+
+import { Form, Button } from '../../styles/global';
+import { signUpRequest } from '../../store/modules/auth/actions';
 import logo from '../../assets/images/logo.svg';
 import { Content } from '../../_layouts/auth/style';
 
@@ -53,10 +55,10 @@ export default function SignIn() {
           />
         </div>
 
-        <button type="submit">Criar conta gratuíta</button>
-      </Form>
+        <Button type="submit">Criar conta gratuíta</Button>
 
-      <Link to="/">Já tenho login</Link>
+        <Link to="/">Já tenho login</Link>
+      </Form>
     </Content>
   );
 }
