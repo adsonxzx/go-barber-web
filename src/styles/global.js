@@ -49,9 +49,9 @@ export default createGlobalStyle`
 `;
 
 export const Content = styled.div`
-  padding: 0 20px;
+  padding: 40px 20px;
   max-width: 800px;
-  margin: 40px auto;
+  margin: 20px auto 0 auto;
 `;
 
 export const Form = styled(Formulario)`

@@ -10,10 +10,16 @@ export function* signIn({ payload }) {
     const response = yield call(api.post, 'sessions', { email, password });
     const { user, token } = response.data;
 
+    if (!user.provider) {
+      toast.error('Acesso apenas para prestador de serviço');
+      return;
+    }
+
     yield put(signInSuccess(token, user));
     history.push('/dashboard');
-  } catch (error) {
-    toast.error('Erro ao efeturar login');
+  } catch (e) {
+    const { error } = e.response.data;
+    toast.error(error);
     yield put(authFailure());
   }
 }
@@ -22,12 +28,13 @@ export function* signUp({ payload }) {
   try {
     const { name, email, password } = payload;
 
-    yield call(api.post, 'users', { name, email, password });
+    yield call(api.post, 'users', { name, email, password, provider: true });
     history.push('/');
     toast.success('Cadastro realizado com sucesso!');
     yield put(signUpSuccess());
-  } catch (error) {
-    toast.success('Error ao realizar cadastro!');
+  } catch (e) {
+    const { error } = e.response.data;
+    toast.error(error);
     yield put(authFailure());
   }
 }

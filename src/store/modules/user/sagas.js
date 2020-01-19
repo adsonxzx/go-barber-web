@@ -15,8 +15,9 @@ export function* updateProfile({ payload }) {
     yield put(updateProfileSuccess(data));
 
     toast.success('Perfil atualizado com sucesso');
-  } catch (error) {
-    toast.error(`error ${error}`);
+  } catch (e) {
+    const { error } = e.response.data;
+    toast.error(error);
   }
 }
 
