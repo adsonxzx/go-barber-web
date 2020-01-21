@@ -9,7 +9,7 @@
 <p align="center">Aplicação web para gerenciamento de agendamento de barbearia</p>
 
 ### Sobre
-  Go barber é uma aplicação de gerenciamento de agendamento de barbearia. Ela é dividida em duas plataformas, web e mobile. A aplicação mobile é usada pelos clientes, onde o cliente pode selecionar o pretador de serviço e data para agendar o serviço. Já a parte web é usada pelo prestador de serviço onde ele pode visualizar quais os agendamentos dos dias da semana. Todas as duas aplicações consomem a mesma API https://github.com/adsonxzx/go-barber.
+  Go barber é uma aplicação de gerenciamento de agendamento de barbearia. Ela é dividida em duas plataformas, web e mobile. A aplicação mobile é usada pelos clientes, onde o cliente pode selecionar o prestador de serviço e data para agendar o serviço. Já a parte web é usada pelo prestador de serviço onde ele pode visualizar quais os agendamentos dos dias da semana. Todas as duas aplicações consomem a mesma API https://github.com/adsonxzx/go-barber.
 
 ### Tecnologias Usadas
 
