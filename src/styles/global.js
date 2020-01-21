@@ -17,6 +17,8 @@ export default createGlobalStyle`
 
   html, body, #root {
     height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   *:focus {
@@ -49,9 +51,9 @@ export default createGlobalStyle`
 `;
 
 export const Content = styled.div`
-  padding: 0px 20px;
+  padding: 40px 20px;
   max-width: 800px;
-  margin: 20px auto 0 auto;
+  margin: 0 auto 0 auto;
 `;
 
 export const Form = styled(Formulario)`

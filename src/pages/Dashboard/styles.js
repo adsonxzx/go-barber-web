@@ -26,6 +26,8 @@ export const AppointmentList = styled.div`
 `;
 
 export const Appointment = styled.div`
+  display: flex;
+  align-items: center;
   background: #fff;
   border-radius: 4px;
   padding: 20px;
@@ -36,6 +38,26 @@ export const Appointment = styled.div`
 
   &:nth-child(2n + 0) {
     margin-right: 0;
+  }
+
+  div:first-child {
+    width: 23px;
+    height: 23px;
+    background: ${props => (props.available ? '#999' : '#7159c1')};
+    border-radius: 50%;
+    margin-right: 20px;
+
+    &::after {
+      content: '';
+      width: 13px;
+      height: 13px;
+      background: ${props => (props.available ? '#999' : '#7159c1')};
+      border-radius: 50%;
+      border: 2px solid #fff;
+      display: block;
+      margin-left: 3px;
+      margin-top: 3px;
+    }
   }
 
   time {

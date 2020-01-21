@@ -32,31 +32,35 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadSchedules() {
-      const response = await api.get(`/schedules`, {
-        params: {
-          date,
-        },
-      });
+      try {
+        const response = await api.get(`/schedules`, {
+          params: {
+            date,
+          },
+        });
 
-      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-      const data = range.map(hour => {
-        const checkDate = setMilliseconds(
-          setSeconds(setMinutes(setHours(date, hour), 0), 0),
-          0
-        );
-        const compareDate = utcToZonedTime(checkDate, timezone);
+        const data = range.map(hour => {
+          const checkDate = setMilliseconds(
+            setSeconds(setMinutes(setHours(date, hour), 0), 0),
+            0
+          );
+          const compareDate = utcToZonedTime(checkDate, timezone);
 
-        return {
-          time: `${hour}:00h`,
-          past: isBefore(compareDate, new Date()),
-          appointment: response.data.find(a =>
-            isEqual(parseISO(a.date), compareDate)
-          ),
-        };
-      });
+          return {
+            time: `${hour}:00h`,
+            past: isBefore(compareDate, new Date()),
+            appointment: response.data.find(a =>
+              isEqual(parseISO(a.date), compareDate)
+            ),
+          };
+        });
 
-      setSchedule(data);
+        setSchedule(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     loadSchedules();
@@ -71,7 +75,7 @@ export default function Dashboard() {
   }
 
   return (
-    <Content>
+    <Content className="dashboard-content">
       <Header>
         <button type="button">
           <MdChevronLeft color="#fff" size={36} onClick={handlePrevDay} />
@@ -85,8 +89,11 @@ export default function Dashboard() {
       <AppointmentList>
         {schedule.map(({ past, appointment, time }) => (
           <Appointment key={time} past={past} available={!appointment}>
-            <time>{time}</time>
-            <span>{appointment ? appointment.user.name : 'Em Aberto'}</span>
+            <div />
+            <div>
+              <time>{time}</time>
+              <span>{appointment ? appointment.user.name : 'Em Aberto'}</span>
+            </div>
           </Appointment>
         ))}
       </AppointmentList>

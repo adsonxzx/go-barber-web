@@ -15,6 +15,8 @@ export function* signIn({ payload }) {
       return;
     }
 
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
     yield put(signInSuccess(token, user));
     history.push('/dashboard');
   } catch (e) {
@@ -40,6 +42,7 @@ export function* signUp({ payload }) {
 }
 
 export function setToken({ payload }) {
+  console.tron.log('O token esta na requisiçao a partir daqui');
   if (!payload) return;
 
   const { token } = payload.auth;
