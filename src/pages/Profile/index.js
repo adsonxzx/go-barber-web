@@ -6,23 +6,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateProfileRequest } from '../../store/modules/user/actions';
 import { signOut } from '../../store/modules/auth/actions';
 import { Content, Form, Button } from '../../styles/global';
+import Avatar from './Avatar';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const { name, email } = useSelector(state => state.user.profile);
-
-  const initialData = {
-    name,
-    email,
-  };
+  const profile = useSelector(state => state.user.profile);
 
   async function handleSubmit(data) {
+    console.log(data);
     dispatch(updateProfileRequest(data));
   }
 
   return (
     <Content>
-      <Form onSubmit={handleSubmit} initialData={initialData}>
+      <Form onSubmit={handleSubmit} initialData={profile}>
+        <Avatar name="avatar_id" />
+
         <div className="form-control">
           <label htmlFor="name">
             <MdPerson color="#fff" />

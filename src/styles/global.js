@@ -49,7 +49,7 @@ export default createGlobalStyle`
 `;
 
 export const Content = styled.div`
-  padding: 40px 20px;
+  padding: 0px 20px;
   max-width: 800px;
   margin: 20px auto 0 auto;
 `;

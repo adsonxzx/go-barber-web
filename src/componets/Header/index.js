@@ -8,13 +8,15 @@ import logoPurple from '../../assets/images/logo-purple.svg';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
-  const { name } = useSelector(state => state.user.profile);
-  const nameArray = name.split(' ');
+  const profile = useSelector(state => state.user.profile);
+  const nameArray = profile.name.split(' ');
+
+  const url = profile.avatar ? profile.avatar.url : null;
 
   const nameFormat =
     nameArray.length > 2
       ? `${nameArray[0]} ${nameArray[nameArray.length - 1]}`
-      : name;
+      : profile.name;
 
   return (
     <Container>
@@ -34,7 +36,10 @@ export default function Header() {
             </div>
 
             <img
-              src="https://api.adorable.io/avatars/50/abott@adorable.png"
+              src={
+                url ||
+                'https://api.adorable.io/avatars/120/abott@adorable.io.png'
+              }
               alt=""
             />
           </Profile>
